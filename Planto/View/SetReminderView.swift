@@ -4,6 +4,8 @@ struct SetReminderView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    var viewModel: PlantViewModel
+    
     @State private var plantName = ""
     
     @State private var room = "Bedroom"
@@ -38,7 +40,16 @@ struct SetReminderView: View {
                 Spacer()
                 
                 Button {
-                    print("Save tapped")
+                    if !plantName.isEmpty {
+                        viewModel.addPlant(
+                            name: plantName,
+                            room: room,
+                            light: light,
+                            wateringDay: wateringDay,
+                            water: water
+                        )
+                        dismiss()
+                    }
                 } label: {
                     Image(systemName: "checkmark")
                         .frame(width: 40, height: 40)
@@ -83,5 +94,6 @@ struct SetReminderView: View {
 }
 
 #Preview {
-    SetReminderView().preferredColorScheme(.dark)
+    SetReminderView(viewModel: PlantViewModel())
+        .preferredColorScheme(.dark)
 }

@@ -7,13 +7,22 @@ struct PlantRowView: View {
     var light: String
     var water: String
     
+    var isWatered: Bool
+    var onToggle: () -> Void
+    
+    
     var body: some View {
         
         
         HStack(spacing: 12) {
-            Image(systemName: "circle")
-                .font(.title2)
-                .foregroundStyle(.secondary)
+            Button {
+                onToggle()
+            } label: {
+                Image(systemName: isWatered ? "checkmark.circle.fill" : "circle")
+                    .font(.title2)
+                    .foregroundStyle(isWatered ? Color.green : Color.secondary)
+            }
+            .buttonStyle(.plain)
             
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 4) {
@@ -38,6 +47,6 @@ struct PlantRowView: View {
 }
 
 #Preview {
-    PlantRowView(room: "Kitchen", name: "Monstera", light: "Full sun", water: "20-50 ml")
+    PlantRowView(room: "Kitchen", name: "Monstera", light: "Full sun", water: "20-50 ml", isWatered: false, onToggle: {})
         .preferredColorScheme(.dark)
 }
