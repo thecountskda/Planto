@@ -37,6 +37,10 @@ class PlantViewModel {
         }
     }
     
+    var allDone: Bool {
+        !plants.isEmpty && wateredCount == plants.count
+    }
+    
     
 }
 
