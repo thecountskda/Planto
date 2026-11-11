@@ -14,6 +14,17 @@ struct ContentView: View {
                 .bold()
                 .padding(.horizontal)
             
+            if !viewModel.plants.isEmpty {
+                VStack(spacing: 12) {
+                    Text(viewModel.headerMessage)
+                        .font(.subheadline)
+                    ProgressBarView(progress: viewModel.progress)
+                }
+                .padding()
+            }
+            
+            //Your design’s bar is thinner and the text is centered. Experiment with .frame(height:) and .multilineTextAlignment(.center) or .frame(maxWidth: .infinity) on the text until it matches.
+            
             ZStack(alignment: .bottomTrailing){
                 
                 List {
@@ -42,6 +53,7 @@ struct ContentView: View {
                 }
                 .listStyle(.plain)
                 
+                //old code folded
                 /*  ScrollView {
                  VStack(spacing: 0) {
                  
