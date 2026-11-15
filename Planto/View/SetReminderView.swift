@@ -62,7 +62,7 @@ struct SetReminderView: View {
                 } label: {
                     Image(systemName: "checkmark")
                         .frame(width: 40, height: 40)
-                        .background(Color.green)
+                        .background(Color.appGreen)
                         .clipShape(Circle())
                 }
             }
@@ -75,7 +75,7 @@ struct SetReminderView: View {
             }
             .padding()
             .background(Color.gray.opacity(0.15))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .padding(.horizontal)
             
             VStack(spacing: 0) {
@@ -86,7 +86,7 @@ struct SetReminderView: View {
                 PickerRowView(icon: "sun.max", title: "Light", selection: $light, options: lights)
             }
             .background(Color.gray.opacity(0.15))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .padding(.horizontal)
             
             VStack(spacing: 0) {
@@ -95,7 +95,7 @@ struct SetReminderView: View {
                 PickerRowView(icon: "drop", title: "Water", selection: $water, options: Water)
             }
             .background(Color.gray.opacity(0.15))
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .padding(.horizontal)
          
             if let plantToEdit {
@@ -108,11 +108,12 @@ struct SetReminderView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.gray.opacity(0.15))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
                 }
                 .padding(.horizontal)
             }
             
+            Spacer()
         }
     }
 }

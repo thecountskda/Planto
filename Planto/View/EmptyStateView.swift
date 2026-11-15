@@ -31,7 +31,7 @@ struct EmptyStateView: View {
                     action()
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.green)
+                .tint(.appGreen)
             }
             
             //if let buttonTitle { ... } is how you safely open an optional. The code inside runs only if there is a value, and inside it buttonTitle is a normal String.

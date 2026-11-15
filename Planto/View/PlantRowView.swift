@@ -10,6 +10,14 @@ struct PlantRowView: View {
     var isWatered: Bool
     var onToggle: () -> Void
     
+    var lightIcon: String {
+        switch light {
+        case "Full sun": return "sun.max"
+        case "Partial Sun": return "sun.min"
+        case "Low Light": return "moon"
+        default: return "sun.max"
+        }
+    }
     
     var body: some View {
         
@@ -20,7 +28,7 @@ struct PlantRowView: View {
             } label: {
                 Image(systemName: isWatered ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
-                    .foregroundStyle(isWatered ? Color.green : Color.secondary)
+                    .foregroundStyle(isWatered ? Color.green2 : Color.secondary)
             }
             .buttonStyle(.plain)
             
@@ -35,8 +43,8 @@ struct PlantRowView: View {
                     .font(.title3)
                 
                 HStack {
-                    TagView(icon: "sun.max", text: light)
-                    TagView(icon: "drop", text: water)
+                    TagView(icon: lightIcon, text: light).foregroundStyle(Color.light)
+                    TagView(icon: "drop", text: water).foregroundStyle(Color.water)
                 }
                 
             }.opacity(isWatered ? 0.5 : 1)//if the plant is watered, use 0.5 (half transparent), otherwise 1 (fully visible).

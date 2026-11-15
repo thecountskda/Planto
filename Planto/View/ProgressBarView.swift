@@ -10,7 +10,7 @@ struct ProgressBarView: View {
                     .fill(Color.gray.opacity(0.3))
 
                 Capsule()
-                    .fill(Color.green)
+                    .fill(Color.appGreen)
                     .frame(width: geo.size.width * progress)
             }
         }
