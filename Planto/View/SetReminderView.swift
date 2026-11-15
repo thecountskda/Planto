@@ -6,21 +6,31 @@ struct SetReminderView: View {
     
     var viewModel: PlantViewModel
     
-    @State private var plantName = ""
+    var plantToEdit: Plant? = nil //nil means “we’re adding a new plant”, and a value means “we’re editing this one”.
     
-    @State private var room = "Bedroom"
+    @State private var plantName: String
+    @State private var room: String
+    @State private var light: String
+    @State private var wateringDay: String
+    @State private var water: String
+
     let rooms = ["Bedroom", "Living Room", "Kitchen", "Balcony", "Bathroom"]
-   
-    
-    @State private var light = "Full sun"
     let lights = ["Full sun", "Partial Sun", "Low Light"]
-    
-    @State private var wateringDay = "Every day"
     let WateringDays = ["Every day", "Every 2 days", "Every 3 days", "Once a week", "Every 10 days", "Every 2 weeks"]
-    
-    @State private var water = "20-50 ml"
     let Water = ["20-50 ml", "50-100 ml", "100-200 ml", "200-300 ml"]
     
+    
+    
+    
+    init(viewModel: PlantViewModel, plantToEdit: Plant? = nil) {
+        self.viewModel = viewModel
+        self.plantToEdit = plantToEdit
+        _plantName = State(initialValue: plantToEdit?.name ?? "")
+        _room = State(initialValue: plantToEdit?.room ?? "Bedroom")
+        _light = State(initialValue: plantToEdit?.light ?? "Full sun")
+        _wateringDay = State(initialValue: plantToEdit?.wateringDay ?? "Every day")
+        _water = State(initialValue: plantToEdit?.water ?? "20-50 ml")
+    }
     
     var body: some View {
         VStack (spacing: 16) {
@@ -40,14 +50,13 @@ struct SetReminderView: View {
                 Spacer()
                 
                 Button {
+                    
                     if !plantName.isEmpty {
-                        viewModel.addPlant(
-                            name: plantName,
-                            room: room,
-                            light: light,
-                            wateringDay: wateringDay,
-                            water: water
-                        )
+                        if let plantToEdit {
+                            viewModel.updatePlant(plantToEdit, name: plantName, room: room, light: light, wateringDay: wateringDay, water: water)
+                        } else {
+                            viewModel.addPlant(name: plantName, room: room, light: light, wateringDay: wateringDay, water: water)
+                        }
                         dismiss()
                     }
                 } label: {
@@ -88,12 +97,30 @@ struct SetReminderView: View {
             .background(Color.gray.opacity(0.15))
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .padding(.horizontal)
+         
+            if let plantToEdit {
+                Button {
+                    viewModel.deletePlant(plantToEdit)
+                    dismiss()
+                } label: {
+                    Text("Delete Reminder")
+                        .foregroundStyle(.red)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.gray.opacity(0.15))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .padding(.horizontal)
+            }
             
         }
     }
 }
 
 #Preview {
-    SetReminderView(viewModel: PlantViewModel())
-        .preferredColorScheme(.dark)
+    SetReminderView(
+        viewModel: PlantViewModel(),
+        plantToEdit: Plant(name: "Pothos", room: "Kitchen", light: "Low Light", wateringDay: "Every 3 days", water: "50-100 ml")
+    )
+    .preferredColorScheme(.dark)
 }

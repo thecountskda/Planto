@@ -39,7 +39,9 @@ struct PlantRowView: View {
                     TagView(icon: "drop", text: water)
                 }
                 
-            }
+            }.opacity(isWatered ? 0.5 : 1)//if the plant is watered, use 0.5 (half transparent), otherwise 1 (fully visible).
+            .animation(.easeInOut, value: isWatered)//a smooth fade
+            
             
             Spacer()
         }

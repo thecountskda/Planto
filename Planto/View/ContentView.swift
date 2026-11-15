@@ -4,6 +4,7 @@ struct ContentView: View {
     
     @State private var viewModel = PlantViewModel()
     @State private var showingSheet = false
+    @State private var plantToEdit: Plant?
     
     var body: some View {
         
@@ -56,7 +57,10 @@ struct ContentView: View {
                                 onToggle: {
                                     viewModel.toggleWatered(plant)
                                 }
-                            )
+                            ).contentShape(Rectangle())
+                                .onTapGesture {
+                                    plantToEdit = plant
+                                }
                             .swipeActions {
                                 Button(role: .destructive) {
                                     
@@ -88,6 +92,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showingSheet) {
             SetReminderView(viewModel: viewModel)
+                
+                }.sheet(item: $plantToEdit) { plant in
+                    SetReminderView(viewModel: viewModel, plantToEdit: plant)
         }
     } //this is passing the ViewModel to the sheet
 }

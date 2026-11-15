@@ -41,7 +41,17 @@ class PlantViewModel {
         !plants.isEmpty && wateredCount == plants.count
     }
     
+    func updatePlant(_ plant: Plant, name: String, room: String, light: String, wateringDay: String, water: String) {
+        if let index = plants.firstIndex(where: { $0.id == plant.id }) {
+            plants[index].name = name
+            plants[index].room = room
+            plants[index].light = light
+            plants[index].wateringDay = wateringDay
+            plants[index].water = water
+        }
+    } // this function finds the plant by id, like toggleWatered, and changes its fields. We don’t touch isWatered, so a checked plant stays checked after an edit.
     
+   
 }
 
 
