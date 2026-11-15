@@ -29,10 +29,13 @@ struct ContentView: View {
             if  !viewModel.plants.isEmpty && !viewModel.allDone {
                 VStack(spacing: 12) {
                     Text(viewModel.headerMessage)
-                        .font(.subheadline)
+                        .font(.headline) //subheadline
                     ProgressBarView(progress: viewModel.progress)
                 }
                 .padding()
+                .padding(.horizontal, 20)
+                .padding(.bottom, 20)
+                
             }
             
             //Your design’s bar is thinner and the text is centered. Experiment with .frame(height:) and .multilineTextAlignment(.center) or .frame(maxWidth: .infinity) on the text until it matches.
@@ -87,9 +90,14 @@ struct ContentView: View {
                                 onToggle: {
                                     viewModel.toggleWatered(plant)
                                 }
-                            ).contentShape(Rectangle())
+                            )/*.contentShape(Rectangle())
                                 .onTapGesture {
-                                    plantToEdit = plant
+                                    plantToEdit = plant*/
+                            
+                            .listRowInsets(EdgeInsets())
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                plantToEdit = plant
                                 }
                                 .swipeActions {
                                     Button(role: .destructive) {

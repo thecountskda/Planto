@@ -14,7 +14,7 @@ struct ProgressBarView: View {
                     .frame(width: geo.size.width * progress)
             }
         }
-        .frame(height: 6)
+        .frame(height: 8)
         .animation(.easeInOut, value: progress)
     }
 }

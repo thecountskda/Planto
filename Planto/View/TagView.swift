@@ -9,7 +9,7 @@ struct TagView: View {
             Image(systemName: icon)
             Text(text)
         }
-        .font(.caption2)
+        .font(.caption)
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
         .background(Color.gray.opacity(0.2))
